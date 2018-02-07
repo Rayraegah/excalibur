@@ -1,0 +1,15 @@
+{
+  "name": "excalibur",
+  "version": "1.0.0",
+  "description": "RPG game with turn based battles",
+  "main": "index.html",
+  "scripts": {
+    "serve": "npx serve game"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^11.1.0"
+  }
+}

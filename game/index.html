@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--
+    Teaching kids how to code by building an old school RPG game with turn
+    based battles and animations that takes place on an island.
+    
+    NOTES:
+    ------
+    Using phaser to demonstrate how to import a 3rd party library.
+    It also demonstrates how to read API documentation and consume libraries.
+    Also explaining markdown syntax by documenting some parts of the game.
+  -->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>Excalibur</title>
+
+    <!-- Phaser.js - HTML5 Game Engine -->
+    <script src="lib/phaser.min.js" charset="utf-8"></script>
+
+    <!-- Game JS files -->
+    <script src="js/utils.js" charset="utf-8"></script>
+    <script src="js/globals.js" charset="utf-8"></script>
+    <script src="js/save.js" charset="utf-8"></script>
+    <script src="js/scenes.js" charset="utf-8"></script>
+    <script src="js/combat.js" charset="utf-8"></script>
+    <script src="js/character.js" charset="utf-8"></script>
+    <script src="js/enemies.js" charset="utf-8"></script>
+    <script src="js/setup.js" charset="utf-8"></script>
+  </head>
+
+  <body style="background: black; margin: 0 auto; padding: 0px;">
+    <div id="loader" style="z-index:1000">
+      <div
+        class="lds-ripple"
+        style=" display: inline-block; position: relative; width: 64px; height: 64px; top: 50%; left: 50%; margin: -32px;"
+      >
+        <div
+          style=" position: absolute; border: 4px solid #fff; opacity: 1; border-radius: 50%; animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;"
+        ></div>
+        <div
+          style=" position: absolute; border: 4px solid #fff; opacity: 1; border-radius: 50%; animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>

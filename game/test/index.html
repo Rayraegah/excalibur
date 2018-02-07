@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <script src="lib/phaser.min.js" charset="utf-8"></script> -->
+  <script src="http://labs.phaser.io/build/phaser-arcade-physics.min.js"></script>
+  <style media="screen">
+    html,
+    body {
+      margin: 0 auto;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+
+  var swidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
+  var sheight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  var cursors = ""
+
+  var config = {
+    type: Phaser.AUTO,
+    width: swidth,
+    height: sheight,
+    physics: {
+      default: 'arcade',
+      arcade: {
+        gravity: {
+          y: 1000
+        }
+      }
+    },
+    scene: {
+      preload: preload,
+      create: create,
+      update: update
+    }
+  };
+  var game = new Phaser.Game(config);
+
+  function preload() {
+    this.load.setBaseURL('http://labs.phaser.io');
+    this.load.image('sky', 'assets/skies/space3.png');
+    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
+    this.load.image('red', 'assets/particles/red.png');
+  }
+
+  function create() {
+    // this.add.image(400, 300, 'sky');
+    this.add.image(400, 300, "sky");
+    this.add.image(800, 300, "sky")
+    this.add.image(1200, 300, "sky")
+    console.log(this.width)
+    var particles = this.add.particles('red');
+    var emitter = particles.createEmitter({
+      speed: 10,
+      scale: {
+        start: 1,
+        end: 0
+      },
+      blendMode: 'ADD'
+    });
+    var emitter2 = particles.createEmitter({
+      speed: 100,
+      scale: {
+        start: 1,
+        end: 0
+      },
+      blendMode: 'DIVIDE'
+    });
+    var logo = this.physics.add.image(400, 100, 'logo');
+    logo.setVelocity(200, 0);
+    logo.setBounce(0.4, 0.75);
+    logo.setCollideWorldBounds(true);
+    emitter.startFollow(logo);
+    emitter2.startFollow(logo);
+
+    player = this.physics.add.sprite(100, 450, 'dude');
+
+    player.setBounce(0.2);
+    player.setCollideWorldBounds(true);
+
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('dude', {
+        start: 0,
+        end: 3
+      }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'turn',
+      frames: [{
+        key: 'dude',
+        frame: 4
+      }],
+      frameRate: 20
+    });
+
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('dude', {
+        start: 5,
+        end: 8
+      }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    player.body.setGravityY(300)
+    this.physics.add.collider(player);
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+
+
+  }
+
+  var xvelo = 0
+  var yvelo = 0
+
+  function update() {
+    if (cursors.left.isDown) {
+      player.setVelocityX(-160);
+      xvelo = -160
+    } else if (cursors.right.isDown) {
+      player.setVelocityX(160);
+      xvelo = 160
+    } else {
+      if (xvelo > 0) {
+        xvelo -= 5
+      } else if (xvelo < 0) {
+        xvelo += 5
+      }
+      player.setVelocityX(xvelo);
+
+    }
+    up = cursors.up.isDown || cursors.space.isDown
+    if (up) {
+      if (yvelo > 0) {
+        yvelo -= 10
+      } else if (yvelo < 0) {
+        yvelo += 10
+      } else {
+        player.setVelocityY(-330);
+        yvelo = -300
+      }
+    }
+  }
+  </script>
+
+</body>
+
+</html>
